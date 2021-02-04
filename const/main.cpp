@@ -44,3 +44,4 @@ int main()
     printTeacher02(&tb);
     return 0;
 }
+//const声明的变量,在编译期间就已经分配内存了
