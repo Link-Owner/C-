@@ -29,6 +29,26 @@ void printTeacher02(Teacher* const ta)
 }
 
 
+//const声明的变量,在编译期间就已经分配内存了
+
+// const声明的变量是由编译器在编译阶段处理的
+// define的关键字是在预处理阶段由预处理器处理的,单纯的提供文本替换
+
+
+void func1()
+{
+    #define n 10
+    const int m = 20;
+    // #undef a
+}
+
+void func2()
+{
+    //当func1函数没有使用undef的时候,n是可用的,反之不可用.
+    //m是一个const 在func2函数中,无论怎么样,都不可以使用,有类型检查
+    std::cout << "a=" << n << "b=" << m << std::endl;
+}
+
 int main()
 {
     const int a = 10;
@@ -42,6 +62,8 @@ int main()
 
     printTeacher(&ta);
     printTeacher02(&tb);
+
+    func1();
+    func2();
     return 0;
 }
-//const声明的变量,在编译期间就已经分配内存了
