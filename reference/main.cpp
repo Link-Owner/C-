@@ -1,43 +1,30 @@
 #include <iostream>
 
 
-// 引用很像一个常量???
-
-struct Teacher
+int getA()
 {
-    char name[64];
-    int age;
-
-    int &a;
-    int &b;
-};
-
-// 引用在C++内部是一个常量指针
-// Type &var = name; Type *const name
-// C++编译器在编译过程中使用常量指针作为引用的内部实现,因此引用所占用的内存空间大小和指针所占用的内存空间大小相同
-/*
-void func(int &a)
-{
-    a = 5;
+    int a;
+    a = 10;
+    return a;
 }
-void func(const *int a)
-{
-    *a = 5;
-}
-*/
 
-void xxx(int &a1)
+int &getA2()
 {
-    a1 = 100;
+    // 返回静态变量或者全局变量,则没问题
+    static int b;  //如果此处不加static,变量b的内存地址被析构,则编译器报错.函数返回值不要用引用!!!!!!
+    b = 20;
+    return b;
 }
+
 
 
 int main()
 {
-    printf("sizeof(Teacher)=[%ld]\n", sizeof(Teacher)); //经验证,得出的结果是88,说明引用占用内存空间
-    int a = 10;
-    printf("a=[%d]\n", a);
 
+    int a1 = getA();
+    int a2;
+    a2 = getA2();
 
+    printf("a1=[%d], a2=[%d]\n", a1, a2);
     return 0;
 }
